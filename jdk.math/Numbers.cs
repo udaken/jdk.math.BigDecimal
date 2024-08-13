@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,8 +19,18 @@ internal class Long {
     public static int signum(long i) => Math.Sign(i);
     public static int compare(long x, long y) => x.CompareTo(y);
 
+    private static (ulong Quotient, ulong Remainder) DivRem(ulong left, ulong right) {
+        ulong quotient = left / right;
+        return (quotient, left - (quotient * right));
+    }
+
     public static (long Quotient, long Remainder) divRemUnsigned(long left, long right) {
-        (ulong Quotient, ulong Remainder) = ulong.DivRem((ulong) left, (ulong) right);
+        (ulong Quotient, ulong Remainder) =
+#if NET7_0_OR_GREATER
+        Math.DivRem((ulong) left, (ulong) right);
+#else
+        DivRem((ulong) left, (ulong) right);
+#endif
         return ((long) Quotient, (long) Remainder);
     }
 
@@ -47,7 +59,13 @@ internal static class Float {
 
     public const float POSITIVE_INFINITY = Single.PositiveInfinity;
     public const float NEGATIVE_INFINITY = Single.NegativeInfinity;
-    public static float intBitsToFloat(int value) => BitConverter.Int32BitsToSingle(value);
+    public static float intBitsToFloat(int value) {
+#if NETCOREAPP3_1_OR_GREATER
+        return BitConverter.Int32BitsToSingle(value);
+#else
+        return Unsafe.As<int, float>(ref value);
+#endif
+    }
 }
 internal static class Double {
     public const double MAX_VALUE = System.Double.MaxValue;

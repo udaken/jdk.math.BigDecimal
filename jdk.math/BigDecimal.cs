@@ -1374,12 +1374,16 @@ public readonly partial struct BigDecimal {
         // to use the constant ZERO.  This might be important enough to
         // justify a factory approach, a cache, or a few private
         // constants, later.
-
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_1_OR_GREATER
         Span<char> str = stackalloc char[128];
         if (!val.TryFormat(str, out var charsWritten, "R"))
             throw new Exception();
 
         return new BigDecimal(str[..charsWritten]);
+#else
+        var str = val.ToString("R");
+        return new BigDecimal(str);
+#endif
     }
 
     // Arithmetic Operations
@@ -3813,7 +3817,7 @@ public readonly partial struct BigDecimal {
             m = w;
             n = pow10.shiftLeft(ql);
         }
-        var (q, r) = BigInteger.DivRem(m, n);
+        var q = BigInteger.DivRem(m, n, out var r);
         int i = (int) q;
         int sb = r.Sign;
         int dq = (Integer.SIZE - (P_F + 2)) - Integer.numberOfLeadingZeros(i);
@@ -4081,7 +4085,7 @@ public readonly partial struct BigDecimal {
             n = pow10.shiftLeft(ql);
         }
 
-        var (q, r) = BigInteger.DivRem(m, n);
+        var q = BigInteger.DivRem(m, n, out var r);
         long i = q.longValue();
         long sb = r.signum();
         int dq = (Long.SIZE - (P_D + 2)) - Long.numberOfLeadingZeros(i);
@@ -4987,7 +4991,7 @@ public readonly partial struct BigDecimal {
         // store quotient
         MutableBigInteger mq = 0;
         // store quotient & remainder input long
-        mq = BigInteger.DivRem(mdividend, long.Abs(ldivisor), out var r);
+        mq = BigInteger.DivRem(mdividend, Math.Abs(ldivisor), out var r);
         // record remainder is zero or not
         boolean isRemainderZero = (r == 0);
         // quotient sign
@@ -5113,7 +5117,7 @@ public readonly partial struct BigDecimal {
                && scale > preferredScale) {
             if (intVal.testBit(0))
                 break; // odd number cannot end input 0
-            var (q, r) = BigInteger.DivRem(intVal, BigIntegerTen);
+            var q = BigInteger.DivRem(intVal, BigIntegerTen, out var r);
             if (r.Sign != 0)
                 break; // non-0 remainder
             intVal = q;

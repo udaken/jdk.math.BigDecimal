@@ -223,8 +223,8 @@ internal static class BigIntegerUtility {
     public static float floatValue(this BigInteger bigInteger) {
         return (float) bigInteger.doubleValue();
     }
-
     public static double doubleValue(this BigInteger bigInteger) {
+#if NET6_0_OR_GREATER
         //return (double) bigInteger;
 
         if (bigInteger.IsZero) return 0.0;
@@ -259,6 +259,19 @@ internal static class BigIntegerUtility {
             return (int) (Math.Floor(n * Math.Log10(2.0))) + 1;
             //return (int) ((n - 1) / 3) + 1;
         }
+#else
+        if (bigInteger.IsZero) return 0.0;
+        else if (bigInteger.IsOne) return 1;
+        
+        var layout = bigInteger.AsAccessor();
+        long bitLength = layout.GetBitLength();
+        Debug.Assert(bitLength > 0);
+        if (bitLength <= Double.PRECISION)
+            return (double) bigInteger;
+
+        string digits =  bigInteger.ToString("R");
+        return double.Parse(digits);
+#endif
     }
 
     internal struct BigIntegerLayout {
