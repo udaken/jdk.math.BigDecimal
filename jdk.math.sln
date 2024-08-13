@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "jdk.math.test", "jdk.math.test\jdk.math.test.csproj", "{7DEE4547-0321-41B9-A342-17F4131A235D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "jdk.math", "jdk.math\jdk.math.csproj", "{CC8B0A0D-04B4-4496-AD5A-348318BBE7DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7DEE4547-0321-41B9-A342-17F4131A235D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DEE4547-0321-41B9-A342-17F4131A235D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DEE4547-0321-41B9-A342-17F4131A235D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DEE4547-0321-41B9-A342-17F4131A235D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC8B0A0D-04B4-4496-AD5A-348318BBE7DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC8B0A0D-04B4-4496-AD5A-348318BBE7DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC8B0A0D-04B4-4496-AD5A-348318BBE7DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC8B0A0D-04B4-4496-AD5A-348318BBE7DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5677059D-0CEB-4A6E-9AA6-638FFA9F9F1A}
+	EndGlobalSection
+EndGlobal
