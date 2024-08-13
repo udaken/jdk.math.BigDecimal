@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\java.math\jdk.math.csproj" />
+    <ProjectReference Include="..\jdk.math\jdk.math.csproj" />
   </ItemGroup>
 
   <ItemGroup>
