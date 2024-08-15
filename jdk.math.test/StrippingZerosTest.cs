@@ -79,12 +79,12 @@ public class StrippingZerosTest
     {
         foreach (var (input, expected) in testCases)
         {
-            Assert.AreEqual(expected, input.stripTrailingZeros(), $"For input {input} did not receive expected result {expected}, got {input.stripTrailingZeros()}");
+            Assert.That(expected, Is.EqualTo(input.stripTrailingZeros()), $"For input {input} did not receive expected result {expected}, got {input.stripTrailingZeros()}");
 
             var negInput = input.negate();
             var negExpected = expected.negate();
 
-            Assert.AreEqual(negExpected, negInput.stripTrailingZeros(), $"For input {negInput} did not receive expected result {negExpected}, got {negInput.stripTrailingZeros()}");
+            Assert.That(negExpected, Is.EqualTo(negInput.stripTrailingZeros()), $"For input {negInput} did not receive expected result {negExpected}, got {negInput.stripTrailingZeros()}");
         }
     }
 }

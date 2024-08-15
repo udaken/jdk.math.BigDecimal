@@ -62,7 +62,7 @@ public class AddTests
 
         for (int i = 0; i < bd1.Length; i++)
         {
-            Assert.AreEqual(expectedResult[i], bd1[i].add(bd2));
+            Assert.That(expectedResult[i], Is.EqualTo(bd1[i].add(bd2)));
         }
     }
 
@@ -130,7 +130,7 @@ public class AddTests
         _ = a.precision();
         BigDecimal sum2 = a.add(BigDecimal.One, mc);
 
-        Assert.AreEqual(sum1, sum2, "Unequal sums after calling precision!");
+        Assert.That(sum1, Is.EqualTo(sum2), "Unequal sums after calling precision!");
     }
 
     [Test]
@@ -174,7 +174,7 @@ public class AddTests
             BigDecimal roundedExactSum = exactSum.round(mc);
 
             BigDecimal sum = b1.add(b2, mc);
-            Assert.AreEqual(roundedExactSum, sum,
+            Assert.That(roundedExactSum, Is.EqualTo(sum),
                 $"Exact sum {exactSum} [new BigDecimal(\"{b1}\").add(new BigDecimal(\"{b2}\"))]rounded by {mc} expected: {roundedExactSum} got: {sum}");
         }
     }

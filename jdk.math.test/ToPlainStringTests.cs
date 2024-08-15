@@ -54,7 +54,7 @@ public class ToPlainStringTests
             ["8e7",                     "80000000"],
             ["9e8",                     "900000000"],
             ["1e9",                     "1000000000"],
-            
+
             [".0",                      "0.0"],
             [".1",                      "0.1"],
             [".10",                     "0.10"],
@@ -69,7 +69,7 @@ public class ToPlainStringTests
             ["8e-8",                    "0.00000008"],
             ["9e-9",                    "0.000000009"],
             ["9000e-12",                "0.000000009000"],
-            
+
             ["9000e-22",                 "0.0000000000000000009000"],
             ["12345678901234567890",     "12345678901234567890"],
             ["12345678901234567890e22",  "123456789012345678900000000000000000000000"],
@@ -85,10 +85,10 @@ public class ToPlainStringTests
         {
             BigDecimal bd = new BigDecimal(testCase[0]);
 
-            Assert.AreEqual(bd.toPlainString(), testCase[1]);
+            Assert.That(bd.toPlainString(), Is.EqualTo(testCase[1]));
 
             bd = new BigDecimal("-" + testCase[0]);
-            Assert.True(bd.signum() == 0 || bd.toPlainString().Equals("-" + testCase[1], StringComparison.Ordinal));
+            Assert.That(bd.signum() == 0 || bd.toPlainString().Equals("-" + testCase[1], StringComparison.Ordinal), Is.True);
         }
     }
 

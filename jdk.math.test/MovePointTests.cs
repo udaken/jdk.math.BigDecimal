@@ -33,58 +33,60 @@ using static jdk.math.BigDecimal;
 namespace jdk.math.test;
 
 [TestFixture]
-public class MovePointTests {
+public class MovePointTests
+{
 
-	[Test]
-    public void movePoint() {
+    [Test]
+    public void movePoint()
+    {
         BigDecimal bd;
 
         bd = BigDecimal.valueOf(1, -3);
-        Assert.AreNotEqual(bd, bd.movePointLeft(0));
-        Assert.AreNotEqual(bd, bd.movePointRight(0));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointLeft(0)));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointRight(0)));
 
         bd = BigDecimal.valueOf(1, 0);
-        Assert.AreEqual(bd, bd.movePointLeft(0));
-        Assert.AreEqual(bd, bd.movePointRight(0));
+        Assert.That(bd, Is.EqualTo(bd.movePointLeft(0)));
+        Assert.That(bd, Is.EqualTo(bd.movePointRight(0)));
 
         bd = BigDecimal.valueOf(1, 3);
-        Assert.AreEqual(bd, bd.movePointLeft(0));
-        Assert.AreEqual(bd, bd.movePointRight(0));
+        Assert.That(bd, Is.EqualTo(bd.movePointLeft(0)));
+        Assert.That(bd, Is.EqualTo(bd.movePointRight(0)));
 
         bd = BigDecimal.valueOf(1, -3);
-        Assert.AreNotEqual(bd, bd.movePointLeft(1));
-        Assert.AreNotEqual(bd, bd.movePointLeft(-1));
-        Assert.AreNotEqual(bd, bd.movePointRight(1));
-        Assert.AreNotEqual(bd, bd.movePointRight(-1));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointLeft(1)));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointLeft(-1)));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointRight(1)));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointRight(-1)));
 
         bd = BigDecimal.valueOf(1, 0);
-        Assert.AreNotEqual(bd, bd.movePointLeft(1));
-        Assert.AreNotEqual(bd, bd.movePointLeft(-1));
-        Assert.AreNotEqual(bd, bd.movePointRight(1));
-        Assert.AreNotEqual(bd, bd.movePointRight(-1));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointLeft(1)));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointLeft(-1)));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointRight(1)));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointRight(-1)));
 
         bd = BigDecimal.valueOf(1, 3);
-        Assert.AreNotEqual(bd, bd.movePointLeft(1));
-        Assert.AreNotEqual(bd, bd.movePointLeft(-1));
-        Assert.AreNotEqual(bd, bd.movePointRight(1));
-        Assert.AreNotEqual(bd, bd.movePointRight(-1));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointLeft(1)));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointLeft(-1)));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointRight(1)));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointRight(-1)));
 
         bd = BigDecimal.valueOf(1, -3);
-        Assert.AreNotEqual(bd, bd.movePointLeft(10));
-        Assert.AreNotEqual(bd, bd.movePointLeft(-10));
-        Assert.AreNotEqual(bd, bd.movePointRight(10));
-        Assert.AreNotEqual(bd, bd.movePointRight(-10));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointLeft(10)));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointLeft(-10)));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointRight(10)));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointRight(-10)));
 
         bd = BigDecimal.valueOf(1, 0);
-        Assert.AreNotEqual(bd, bd.movePointLeft(10));
-        Assert.AreNotEqual(bd, bd.movePointLeft(-10));
-        Assert.AreNotEqual(bd, bd.movePointRight(10));
-        Assert.AreNotEqual(bd, bd.movePointRight(-10));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointLeft(10)));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointLeft(-10)));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointRight(10)));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointRight(-10)));
 
         bd = BigDecimal.valueOf(1, 3);
-        Assert.AreNotEqual(bd, bd.movePointLeft(10));
-        Assert.AreNotEqual(bd, bd.movePointLeft(-10));
-        Assert.AreNotEqual(bd, bd.movePointRight(10));
-        Assert.AreNotEqual(bd, bd.movePointRight(-10));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointLeft(10)));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointLeft(-10)));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointRight(10)));
+        Assert.That(bd, Is.Not.EqualTo(bd.movePointRight(-10)));
     }
 }
