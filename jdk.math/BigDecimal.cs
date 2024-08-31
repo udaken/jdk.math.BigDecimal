@@ -3823,11 +3823,11 @@ public readonly partial struct BigDecimal {
         int dq = (Integer.SIZE - (P_F + 2)) - Integer.numberOfLeadingZeros(i);
         int eq = (Q_MIN_F - 2) - ql;
         if (dq >= eq) {
-            return signum() * float.ScaleB((float) (i | sb), ql);
+            return signum() * MathSupport.scalb((float) (i | sb), ql);
         }
         int mask = (1 << eq) - 1;
         int j = i >> eq | (Integer.signum(i & mask)) | sb;
-        return signum() * float.ScaleB((float) j, Q_MIN_F - 2);
+        return signum() * MathSupport.scalb((float) j, Q_MIN_F - 2);
     }
 
     /**
@@ -4091,13 +4091,13 @@ public readonly partial struct BigDecimal {
         int dq = (Long.SIZE - (P_D + 2)) - Long.numberOfLeadingZeros(i);
         int eq = (Q_MIN_D - 2) - ql;
         if (dq >= eq) {
-            return signum() * Math.ScaleB((double) (i | sb), ql);
+            return signum() * MathSupport.scalb((double) (i | sb), ql);
         }
 
         /* Subnormal */
         ulong mask = (1UL << eq) - 1;
-        long j = i >> eq | (long) ulong.Sign((ulong) i & mask) | sb;
-        return signum() * Math.ScaleB((double) j, Q_MIN_D - 2);
+        long j = (i >> eq) | (long) Long.signum((long) (((ulong) i) & mask)) | sb;
+        return signum() * MathSupport.scalb((double) j, Q_MIN_D - 2);
     }
 
     /**
@@ -4650,7 +4650,7 @@ public readonly partial struct BigDecimal {
      * Internal printing routine
      */
     private static void print(String name, BigDecimal bd) {
-        Console.Out.WriteLine($"{name}:\tintCompact {bd.intCompact}\tintVal {bd.intVal}\tscale {bd.scale}\tprecision {bd.precision}");
+        Console.Out.WriteLine($"{name}:\tintCompact {bd.intCompact}\tintVal {bd.intVal}\tscale {bd._scale}\tprecision {bd._precision}");
     }
 
     /**

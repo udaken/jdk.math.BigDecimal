@@ -40,7 +40,12 @@ internal static class BigIntegerUtility {
 
     public static int hashCode(this BigInteger self) => (int) self.GetHashCode();
 
-    public static int bitLength(this BigInteger self) => (int) self.GetBitLength();
+    public static int bitLength(this BigInteger self) =>
+#if NET5_0_OR_GREATER
+        (int) self.GetBitLength();
+#else
+        (int) self.AsAccessor().GetBitLength();
+#endif
     public static BigInteger abs(this BigInteger self) {
         return BigInteger.Abs(self);
     }

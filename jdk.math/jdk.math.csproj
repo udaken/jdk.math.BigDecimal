@@ -1,13 +1,44 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;netstandard2.1</TargetFrameworks>
     <ImplicitUsings>disable</ImplicitUsings>
     <LangVersion>12.0</LangVersion> 
-    <Nullable>enable</Nullable>
+    <Nullable>enable</Nullable> 
+    <IncludeSymbols>True</IncludeSymbols> 
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat> 
+    <RepositoryUrl>https://github.com/udaken/jdk.math.BigDecimal.git</RepositoryUrl> 
+    <PackageReadmeFile>README.md</PackageReadmeFile> 
+    <PackageProjectUrl>https://github.com/udaken/jdk.math.BigDecimal</PackageProjectUrl> 
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <WarningLevel>7</WarningLevel>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
+  <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">
+    <IsTrimmable>True</IsTrimmable>
+    <IsAotCompatible>True</IsAotCompatible>
+  </PropertyGroup>
+
 
     <ItemGroup>
     <InternalsVisibleTo Include="jdk.math.test" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="..\LICENSE">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+      <None Include="..\README.md">
+        <Pack>True</Pack>
+        <PackagePath>\</PackagePath>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+    </ItemGroup>
+    <ItemGroup Condition="!$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netcoreapp3.1'))">
+      <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
     </ItemGroup>
 </Project>

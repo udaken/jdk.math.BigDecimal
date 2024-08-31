@@ -154,7 +154,7 @@ public readonly struct MathContext : IEquatable<MathContext> {
                        RoundingMode setRoundingMode) {
         if (setPrecision < MIN_DIGITS)
             throw new ArgumentOutOfRangeException("Digits < 0");
-        ArgumentNullException.ThrowIfNull(setPrecision);
+        ArgumentNullExceptionSupport.ThrowIfNull(setPrecision);
 
         precision = setPrecision;
         roundingMode = setRoundingMode;
@@ -177,7 +177,7 @@ public readonly struct MathContext : IEquatable<MathContext> {
      */
     public MathContext(String val) {
         int setPrecision;
-        ArgumentNullException.ThrowIfNull(val);
+        ArgumentNullExceptionSupport.ThrowIfNull(val);
 
         // any error here is a string format problem
         if (!val.StartsWith("precision=", StringComparison.Ordinal))
@@ -337,12 +337,14 @@ public static class RoundingModeUtil {
 
     public static RoundingMode valueOf(ReadOnlySpan<char> str) {
         return str switch {
+            nameof(RoundingMode.UP) => RoundingMode.UP,
             nameof(RoundingMode.DOWN) => RoundingMode.DOWN,
             nameof(RoundingMode.CEILING) => RoundingMode.CEILING,
             nameof(RoundingMode.FLOOR) => RoundingMode.FLOOR,
             nameof(RoundingMode.HALF_UP) => RoundingMode.HALF_UP,
             nameof(RoundingMode.HALF_DOWN) => RoundingMode.HALF_DOWN,
             nameof(RoundingMode.HALF_EVEN) => RoundingMode.HALF_EVEN,
+            nameof(RoundingMode.UNNECESSARY) => RoundingMode.UNNECESSARY,
             _ => throw new ArgumentException(),
         };
     }
